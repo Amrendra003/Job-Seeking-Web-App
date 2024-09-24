@@ -22,12 +22,9 @@ const App = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(
-          "https://job-seeking-web-app-r2fg.onrender.com/api/v1/user/getuser",
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get("/api/v1/user/getuser", {
+          withCredentials: true,
+        });
         setUser(response.data.user);
         setIsAuthorized(true);
       } catch (error) {

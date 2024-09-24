@@ -19,23 +19,17 @@ const MyApplications = () => {
     try {
       if (user && user.role === "Employer") {
         axios
-          .get(
-            "https://job-seeking-web-app-r2fg.onrender.com/api/v1/application/employer/getall",
-            {
-              withCredentials: true,
-            }
-          )
+          .get("/api/v1/application/employer/getall", {
+            withCredentials: true,
+          })
           .then((res) => {
             setApplications(res.data.applications);
           });
       } else {
         axios
-          .get(
-            "https://job-seeking-web-app-r2fg.onrender.com/api/v1/application/jobseeker/getall",
-            {
-              withCredentials: true,
-            }
-          )
+          .get("/api/v1/application/jobseeker/getall", {
+            withCredentials: true,
+          })
           .then((res) => {
             setApplications(res.data.applications);
           });
@@ -52,12 +46,9 @@ const MyApplications = () => {
   const deleteApplication = (id) => {
     try {
       axios
-        .delete(
-          `https://job-seeking-web-app-r2fg.onrender.com/api/v1/application/delete/${id}`,
-          {
-            withCredentials: true,
-          }
-        )
+        .delete(`/api/v1/application/delete/${id}`, {
+          withCredentials: true,
+        })
         .then((res) => {
           toast.success(res.data.message);
           setApplications((prevApplication) =>

@@ -8,6 +8,7 @@ import cors from "cors";
 import { errorMiddleware } from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
+import path from "path";
 
 const app = express();
 config({ path: "./config/config.env" });
@@ -33,6 +34,13 @@ app.use(
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/job", jobRouter);
 app.use("/api/v1/application", applicationRouter);
+app.use("/api/", (req, res) => {
+  res.redirect("/");
+});
+app.use(express.static(path.join(path.resolve(), "../frontend/dist")));
+app.use("/", (req, res) => {
+  res.sendFile(path.join(path.resolve(), "../frontend/dist/index.html"));
+});
 dbConnection();
 
 app.use(errorMiddleware);
